@@ -1,11 +1,8 @@
-version: '3.8'
+version: "3.8"
 
 services:
-
   web:
     build: .
-    image: web
-    container_name: web
     ports:
       - 5004:5000
     command: python manage.py run -h 0.0.0.0
@@ -18,7 +15,7 @@ services:
       - redis
 
   worker:
-    image: web
+    build: .
     command: python manage.py run_worker
     volumes:
       - .:/usr/src/app
@@ -29,13 +26,3 @@ services:
 
   redis:
     image: redis:6-alpine
-
-  dashboard:
-    build: ./project/dashboard
-    image: dashboard
-    container_name: dashboard
-    ports:
-      - 9181:9181
-    command: rq-dashboard -H redis
-    depends_on:
-      - redis

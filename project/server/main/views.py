@@ -40,8 +40,8 @@ def get_status(task_id):
             "status": "success",
             "data": {
                 "task_id": task.get_id(),
-                "task_status": task.get_status(),
                 "task_result": task.result,
+                "task_status": task.get_status(),
             },
         }
     else:
